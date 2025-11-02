@@ -1,0 +1,173 @@
+{
+  "project": {
+    "name": "Product Roadmap",
+    "description": "Roadmap for <Product name>: Epics → Stories/Tasks/Bugs with Scrum views and timeline.",
+    "fields": [
+      {
+        "name": "Status",
+        "type": "single-select",
+        "options": [
+          "Icebox",
+          "Next Sprint",
+          "Current Sprint",
+          "Blocked",
+          "Test",
+          "Done"
+        ]
+      },
+      {
+        "name": "Work Item Type",
+        "type": "single-select",
+        "options": ["Epic", "Story", "Task", "Bug", "Spike", "Chore"]
+      },
+      {
+        "name": "Sprint",
+        "type": "iteration",
+        "config": {
+          "duration_weeks": 2,
+          "start_day_of_week": "Mon",
+          "timezone": "Europe/Stockholm",
+          "iterations_ahead": 6
+        }
+      },
+      {
+        "name": "Priority",
+        "type": "single-select",
+        "options": ["High", "Medium", "Low"]
+      },
+      {
+        "name": "Stage",
+        "type": "single-select",
+        "options": ["Discovery", "Alpha", "Private Beta", "Public Beta", "GA", "Post-GA"]
+      },
+      {
+        "name": "Risk",
+        "type": "single-select",
+        "options": ["High", "Medium", "Low"]
+      },
+      { "name": "Estimate", "type": "number" },
+      { "name": "Story Points", "type": "number" },
+      {
+        "name": "Epic Link",
+        "type": "text",
+        "description": "For Stories/Tasks/Bugs: reference the parent Epic by issue number (e.g., #123) or exact title."
+      },
+      {
+        "name": "Depends On",
+        "type": "text",
+        "description": "Comma-separated list of blocking issues by number (e.g., #12, #45)."
+      },
+      { "name": "OKR", "type": "text" },
+      { "name": "Start Date", "type": "date" },
+      { "name": "Due Date", "type": "date" }
+    ],
+    "views": [
+      {
+        "name": "Scrum Board",
+        "type": "board",
+        "group_by": "Status",
+        "fields_visible": [
+          "Work Item Type",
+          "Sprint",
+          "Priority",
+          "Story Points",
+          "Risk",
+          "Epic Link",
+          "Depends On"
+        ],
+        "filters": []
+      },
+      {
+        "name": "Current Sprint",
+        "type": "board",
+        "group_by": "Status",
+        "fields_visible": [
+          "Work Item Type",
+          "Priority",
+          "Story Points",
+          "Risk",
+          "Epic Link",
+          "Depends On"
+        ],
+        "filters": [
+          { "field": "Sprint", "op": "is", "value": "current" }
+        ]
+      },
+      {
+        "name": "Backlog",
+        "type": "table",
+        "fields_visible": [
+          "Status",
+          "Work Item Type",
+          "Priority",
+          "Stage",
+          "Story Points",
+          "Risk",
+          "Epic Link",
+          "Depends On",
+          "Start Date",
+          "Due Date",
+          "OKR"
+        ],
+        "filters": [
+          { "field": "Status", "op": "in", "value": ["Icebox", "Next Sprint"] }
+        ],
+        "sort": [
+          { "field": "Priority", "direction": "asc" },
+          { "field": "Story Points", "direction": "asc" }
+        ]
+      },
+      {
+        "name": "Epics Roadmap",
+        "type": "timeline",
+        "date_field": "Start Date",
+        "group_by": "Stage",
+        "fields_visible": [
+          "Status",
+          "Priority",
+          "Stage",
+          "Risk",
+          "OKR",
+          "Due Date"
+        ],
+        "filters": [
+          { "field": "Work Item Type", "op": "is", "value": "Epic" }
+        ]
+      },
+      {
+        "name": "Kanban (All Work)",
+        "type": "board",
+        "group_by": "Status",
+        "fields_visible": [
+          "Work Item Type",
+          "Sprint",
+          "Priority",
+          "Stage",
+          "Risk",
+          "Epic Link"
+        ],
+        "filters": []
+      },
+      {
+        "name": "Table (All)",
+        "type": "table",
+        "fields_visible": [
+          "Status",
+          "Work Item Type",
+          "Sprint",
+          "Priority",
+          "Stage",
+          "Story Points",
+          "Risk",
+          "Epic Link",
+          "Depends On",
+          "Start Date",
+          "Due Date",
+          "OKR"
+        ],
+        "filters": []
+      }
+    ]
+  }
+}
+
